@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.idea
+config/config.yml
+docker-compose.yml
+src/alembic.ini
+*.sql

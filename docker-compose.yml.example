@@ -1,0 +1,32 @@
+version: '3.2'
+
+services:
+  postgres:
+      image: postgres:10
+      container_name: gw_api_postgres
+      volumes:
+      - "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
+      - "dbdata:/var/lib/postgresql/data"
+      environment:
+          - POSTGRES_USER=postgres
+          - POSTGRES_PASSWORD=postgres
+          - POSTGRES_DB=postgres
+      ports:
+      - 5432:5432
+
+
+  gw_api:
+    build: .
+    container_name: gw_api
+    volumes:
+      - ./:/app
+#    command:  gunicorn app:gw_app --bind localhost:8080 --worker-class aiohttp.GunicornWebWorker --reload --access-logfile -
+    command: python .
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+
+
+volumes:
+  dbdata:

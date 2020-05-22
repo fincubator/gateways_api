@@ -1,0 +1,24 @@
+test_assets_data = [
+    dict(
+        ticker="BTC",
+        name="Bitcoin",
+        unified_cryptoasset_id=1,
+        can_withdraw=True,
+        can_deposit=True,
+        min_withdraw=0.0018,
+        max_withdraw=1000,
+        maker_fee=0.10,
+        taker_fee=0.10
+    ),
+    dict(
+        ticker="USDT",
+        name="Tether",
+        unified_cryptoasset_id=825,
+        can_withdraw=True,
+        can_deposit=True,
+        min_withdraw=5.0,
+        max_withdraw=100000,
+        maker_fee=0.10,
+        taker_fee=0.10
+    )
+]
