@@ -6,7 +6,7 @@ Create Date: ${create_date}
 
 """
 import sys
-sys.path.append('..')
+sys.path.append('/app')
 
 from alembic import op
 import sqlalchemy as sa

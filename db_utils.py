@@ -2,7 +2,7 @@ import logging
 
 from aiopg.sa import SAConnection as SAConn
 
-from src.database.tables import asset
+from tables import asset
 
 
 logger = logging.getLogger(__name__)

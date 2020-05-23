@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 
-from src.migrations import metadata
+from migrations import metadata
 
 from config import sql_conn_url
 

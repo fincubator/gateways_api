@@ -3,8 +3,8 @@ import logging
 from aiohttp import web
 import aiopg.sa
 
-from src.routes import init_routes
-from src.middleware import init_middleware
+from routes import init_routes
+from middleware import init_middleware
 
 from config import pg_config
 

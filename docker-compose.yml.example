@@ -20,8 +20,7 @@ services:
     container_name: gw_api
     volumes:
       - ./:/app
-#    command:  gunicorn app:gw_app --bind localhost:8080 --worker-class aiohttp.GunicornWebWorker --reload --access-logfile -
-    command: python .
+    command:  gunicorn app:gw_app --bind 0.0.0.0:8080 --worker-class aiohttp.GunicornWebWorker --reload --access-logfile -
     ports:
       - 8080:8080
     depends_on:

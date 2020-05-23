@@ -3,5 +3,6 @@ __pycache__/
 .idea
 config/config.yml
 docker-compose.yml
-src/alembic.ini
+migrations/alembic.ini
 *.sql
+venv/

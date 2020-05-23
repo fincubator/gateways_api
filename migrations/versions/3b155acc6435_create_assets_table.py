@@ -6,13 +6,11 @@ Create Date: 2020-05-22 14:31:51.769077
 
 """
 import sys
-sys.path.append('..')
+sys.path.append('/app')
 
 from alembic import op
 import sqlalchemy as sa
-
-from src.database.tables import *
-
+from tables import asset
 
 # revision identifiers, used by Alembic.
 revision = '3b155acc6435'

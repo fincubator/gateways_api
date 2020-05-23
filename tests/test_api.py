@@ -1,7 +1,7 @@
 from aiohttp.test_utils import AioHTTPTestCase, unittest_run_loop
 
 from app import app_factory
-from src.database.db_utils import add_asset
+from db_utils import add_asset
 from config import PROJECT_NAME, API_V1_ADDRESS
 
 from tests.fixtures import test_assets_data

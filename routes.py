@@ -1,4 +1,4 @@
-from src.views import assets_view, index
+from views import assets_view, index
 from config import API_V1_ADDRESS
 
 
