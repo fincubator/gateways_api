@@ -5,36 +5,22 @@ REST API for BitShares blockchain gateway
 ```shell script
 git clone https://github.com/fincubator/gateways_api
 cd gateways_api/
-cp config/config.yml.example config/config.yml && cp docker-compose.yml.example docker-compose.yml && cp migrations/alembic.ini.example migrations/alembic.ini
+cp config/config.yml.example config/config.yml && cp docker-compose.yml.example docker-compose.yml && cp alembic.ini.example alembic.ini
 ```
 
 if you want to use your own PostgreSQL connection data, you need to change:
 * `config/config.yml`
 * *postgres:environment* in `docker-compose.yml`
-* line 38 in `alembic.ini`
 
 ### Build & Run via Docker
-
 ```shell script
-$ sudo docker-compose up --build 
-$ sudo docker-compose up -d 
-$ sudo docker exec -it gw_api_container_ID bash
+$ sudo docker-compose up -d --build
 ```
 
-\
-Run migration and unittest inside *gw_api* container. 
-Unitests fill the database with test data, don't forget to remove it on production deploy
-```shell script
-root@gw_api_container_ID:/app# cd migrations/
-root@gw_api_container_ID:/app# alembic upgrade head
-root@gw_api_container_ID:/app# cd ..
-root@gw_api_container_ID:/app# python -m unittest
-root@gw_api_container_ID:/app# exit
-```
 
-Go to http://0.0.0.0:8080/api/v1/assets and check it out:
+Go to http://0.0.0.0:8080/api/v1/assets/ and check it out:
 
-`curl http://0.0.0.0:8080/api/v1/assets`
+`curl http://0.0.0.0:8080/api/v1/assets/`
 
 ```json
 {
