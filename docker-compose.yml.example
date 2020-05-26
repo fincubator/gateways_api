@@ -20,7 +20,10 @@ services:
     container_name: gw_api
     volumes:
       - ./:/app
-    command:  gunicorn app:gw_app --bind 0.0.0.0:8080 --worker-class aiohttp.GunicornWebWorker --reload --access-logfile -
+    command: >
+      bash -c "pipenv run alembic upgrade head
+      && pipenv run pytest
+      && pipenv run gunicorn gw_app:gw_app --bind 0.0.0.0:8080 --worker-class aiohttp.GunicornWebWorker --reload --access-logfile - "
     ports:
       - 8080:8080
     depends_on:
