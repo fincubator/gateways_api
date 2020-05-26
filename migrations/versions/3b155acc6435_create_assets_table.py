@@ -6,11 +6,11 @@ Create Date: 2020-05-22 14:31:51.769077
 
 """
 import sys
+# Fix import for docker
 sys.path.append('/app')
 
-from alembic import op
 import sqlalchemy as sa
-from tables import asset
+from models import assets
 
 # revision identifiers, used by Alembic.
 revision = '3b155acc6435'
@@ -20,7 +20,7 @@ depends_on = None
 
 
 def upgrade():
-    asset.create(sa.engine)
+    assets.create(sa.engine)
 
 
 def downgrade():
