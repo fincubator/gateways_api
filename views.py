@@ -1,7 +1,7 @@
 from aiohttp import web
 
-from utils import AssetDataSchema, ValidationError
-from db_utils import get_all_assets
+from data_schemes import AssetDataSchema, CoinDataSchema, ValidationError
+from db_utils import get_all_assets, get_all_coins
 
 from config import PROJECT_NAME
 
@@ -19,6 +19,24 @@ async def assets_view(request):
             try:
                 resp[obj['ticker']] = schema.dump(dict(obj))
             except ValidationError:
+                pass
+            except Exception as ex:
+                pass
+
+        return web.json_response(resp)
+
+
+async def coins_view(request):
+    async with request.app['db'].acquire() as conn:
+        resp_data = await get_all_coins(conn)
+        resp = {}
+        schema = CoinDataSchema()
+        for index, obj in enumerate(resp_data):
+            dict_obj = dict(obj)
+            dict_obj["gate_fee"] = obj.withdraw_fee / 10 ** obj.precision
+            try:
+                resp[index] = schema.dump(dict_obj)
+            except ValueError:
                 pass
             except Exception as ex:
                 pass

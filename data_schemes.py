@@ -39,17 +39,25 @@ class CoinDataSchema(Schema):
     description = fields.Str(required=True)
     backing_coin = fields.Str()
     symbol = fields.Str()
-    issuer = fields.Str()
-    issuer_id = fields.Str()
+
     deposit_allowed = fields.Bool()
     withdrawal_allowed = fields.Bool()
+
     memo_support = fields.Bool()
     memo_version = fields.Int(load_only=True)
+
     precision = fields.Int()
+
+    issuer = fields.Str()
+    issuer_id = fields.Str()
+
     gateway_wallet = fields.Str(load_only=True)
     wallet_type = fields.Str()
+
     min_amount = fields.Int()
     withdraw_fee = fields.Int()
     deposit_fee = fields.Int()
+
     gate_fee = fields.Str()
+
     confirmations = ConfirmationSchema()
