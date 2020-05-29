@@ -1,12 +1,7 @@
-import logging
-
 from aiopg.sa import SAConnection as SAConn
 from sqlalchemy.orm.query import Query
 from sqlalchemy.sql import insert
 from models import Asset, Coin
-
-
-logger = logging.getLogger(__name__)
 
 
 async def get_all_assets(conn: SAConn):
@@ -26,7 +21,7 @@ async def add_asset(conn: SAConn, **asset_data):
         ins = insert(table=Asset).values(**asset_data)
         await conn.execute(ins)
     except Exception as ex:
-        logger.debug(ex)
+        pass
     # TODO catch some exs
 
 
@@ -35,5 +30,5 @@ async def add_coin(conn: SAConn, **coin_data):
         ins = insert(table=Coin).values(**coin_data)
         await conn.execute(ins)
     except Exception as ex:
-        logger.debug(ex)
+        pass
     # TODO catch some exs
