@@ -4,12 +4,18 @@ from marshmallow import Schema, fields, ValidationError
 class BoolLowerCase(fields.Field):
     """
     Field that serializes bool value to lower case string
+    True -> "true", False -> "false"
     """
     def _serialize(self, value, attr, obj, **kwargs):
         return str(value).lower()
 
 
 class ConfirmationSchema(fields.Field):
+    """
+    If confirmations == 0, this mean that transactions are considered confirmed when "irreversible" blockchains
+    time has come.
+    If confirmations > 0, this mean that gateway need to counting "value" of next blocks after goal transaction block
+    """
     def _serialize(self, value, attr, obj, **kwargs):
         if value == 0:
             return {"type": "irreversible"}
@@ -58,6 +64,7 @@ class CoinDataSchema(Schema):
     withdraw_fee = fields.Int()
     deposit_fee = fields.Int()
 
+    # gate_fee do not store in database, and calculated as withdraw_fee / 10 ** precision
     gate_fee = fields.Str()
 
     confirmations = ConfirmationSchema()
