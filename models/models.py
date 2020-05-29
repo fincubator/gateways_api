@@ -2,16 +2,10 @@ import sqlalchemy as sa
 from sqlalchemy.ext.declarative import declarative_base
 from migrations import metadata
 
-from config import sql_conn_url
-
 
 Base = declarative_base()
 
-# Not-async engine for migrations
-sa.engine = sa.create_engine(sql_conn_url, echo=True)
 
-
-# TODO remove to migrations
 assets = sa.Table(
     'assets', metadata,
     sa.Column('id', sa.Integer, primary_key=True, index=True),
