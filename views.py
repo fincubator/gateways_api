@@ -1,3 +1,5 @@
+import logging
+
 from aiohttp import web
 
 from data_schemes import AssetDataSchema, CoinDataSchema, ValidationError
@@ -18,10 +20,10 @@ async def assets_view(request):
         for obj in resp_data:
             try:
                 resp[obj['ticker']] = schema.dump(dict(obj))
-            except ValidationError:
-                pass
+            except ValidationError as ex:
+                logging.debug(f"ValidationError: {ex.messages}")
             except Exception as ex:
-                pass
+                logging.debug(ex)
 
         return web.json_response(resp)
 
@@ -36,9 +38,9 @@ async def coins_view(request):
             dict_obj["gate_fee"] = obj.withdraw_fee / 10 ** obj.precision
             try:
                 resp[index] = schema.dump(dict_obj)
-            except ValidationError:
-                pass
+            except ValidationError as ex:
+                logging.debug(f"ValidationError: {ex.messages}")
             except Exception as ex:
-                pass
+                logging.debug(ex)
 
         return web.json_response(resp)
