@@ -44,36 +44,6 @@ class Asset(Base):
     taker_fee = sa.Column(sa.Numeric)
 
 
-coins = sa.Table(
-    'coins', metadata,
-    sa.Column('id', sa.Integer, primary_key=True, index=True),
-    sa.Column("name", sa.String, unique=True),
-    sa.Column("description", sa.String),
-    sa.Column('backing_coin', sa.String),
-    sa.Column('symbol', sa.String),
-
-    sa.Column("deposit_allowed", sa.Boolean),
-    sa.Column('withdrawal_allowed', sa.Boolean),
-
-    sa.Column('memo_support', sa.Boolean),
-    sa.Column('memo_version', sa.Integer),
-
-    sa.Column('precision', sa.Integer),
-
-    sa.Column("issuer", sa.String),
-    sa.Column("issuer_id", sa.String),
-
-    sa.Column("gateway_wallet", sa.String),
-    sa.Column("wallet_type", sa.String),
-
-    sa.Column('min_amount', sa.Integer),
-    sa.Column('withdraw_fee', sa.Integer),
-    sa.Column("deposit_fee", sa.Integer),
-
-    sa.Column("confirmations", sa.Integer)
-)
-
-
 class Coin(Base):
     __tablename__ = "coins"
 
