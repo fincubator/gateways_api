@@ -3,7 +3,7 @@ import logging
 from aiohttp import web
 import aiopg.sa
 
-from routes import init_routes
+from views import routes
 from middleware import init_middleware
 
 from config import pg_config
@@ -25,7 +25,7 @@ def app_factory() -> web.Application:
 
     app = web.Application()
 
-    init_routes(app)
+    app.add_routes(routes)
     init_middleware(app)
 
     app.on_startup.extend([init_database])

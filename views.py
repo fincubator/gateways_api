@@ -4,14 +4,18 @@ from aiohttp import web
 
 from data_schemes import AssetDataSchema, CoinDataSchema, ValidationError
 from db_utils import get_all_assets, get_all_coins
+from config import PROJECT_NAME, API_V1_ADDRESS
 
-from config import PROJECT_NAME
+
+routes = web.RouteTableDef()
 
 
+@routes.get('/')
 async def index(request):
     return web.Response(text=f"Welcome to {PROJECT_NAME}")
 
 
+@routes.get(f'{API_V1_ADDRESS}/assets/')
 async def assets_view(request):
     async with request.app['db'].acquire() as conn:
         resp_data = await get_all_assets(conn)
@@ -28,6 +32,7 @@ async def assets_view(request):
         return web.json_response(resp)
 
 
+@routes.get(f'{API_V1_ADDRESS}/coins/')
 async def coins_view(request):
     async with request.app['db'].acquire() as conn:
         resp_data = await get_all_coins(conn)
