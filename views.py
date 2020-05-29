@@ -36,7 +36,7 @@ async def coins_view(request):
             dict_obj["gate_fee"] = obj.withdraw_fee / 10 ** obj.precision
             try:
                 resp[index] = schema.dump(dict_obj)
-            except ValueError:
+            except ValidationError:
                 pass
             except Exception as ex:
                 pass
