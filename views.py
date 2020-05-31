@@ -36,13 +36,13 @@ async def assets_view(request):
 async def coins_view(request):
     async with request.app['db'].acquire() as conn:
         resp_data = await get_all_coins(conn)
-        resp = {}
+        resp = []
         schema = CoinDataSchema()
-        for index, obj in enumerate(resp_data):
+        for obj in resp_data:
             dict_obj = dict(obj)
             dict_obj["gate_fee"] = obj.withdraw_fee / 10 ** obj.precision
             try:
-                resp[index] = schema.dump(dict_obj)
+                resp.append(schema.dump(dict_obj))
             except ValidationError as ex:
                 logging.debug(f"ValidationError: {ex.messages}")
             except Exception as ex:
