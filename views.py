@@ -11,7 +11,7 @@ routes = web.RouteTableDef()
 
 
 def json_view(func):
-    async def wrapped(request):
+    async def wrapped(request) -> web.json_response:
         return web.json_response(await func(request))
     return wrapped
 
