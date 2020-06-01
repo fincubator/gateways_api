@@ -4,10 +4,10 @@ import sys
 
 sys.path.append("/app")
 
-from db_utils import add_asset
+from db_utils import add_asset, add_coin
 from config import PROJECT_NAME, API_V1_ADDRESS
 from gw_app import app_factory
-from tests.fixtures import test_assets_data
+from tests.fixtures import test_assets_data, test_coins_data
 
 
 @pytest.fixture
@@ -27,6 +27,16 @@ async def test_assets(cli):
         async with cli.server.app['db'].acquire() as conn:
             await add_asset(conn, **asset_data)
     resp = await cli.get(F"{API_V1_ADDRESS}/assets/")
+    assert resp.status == 200
+    json_data = await resp.json()
+    assert isinstance(json_data, dict)
+
+
+async def test_coins(cli):
+    for coin_data in test_coins_data:
+        async with cli.server.app['db'].acquire() as conn:
+            await add_coin(conn, **coin_data)
+    resp = await cli.get(F"{API_V1_ADDRESS}/coins/")
     assert resp.status == 200
     json_data = await resp.json()
     assert isinstance(json_data, dict)

@@ -1,7 +1,4 @@
-import logging
 from aiohttp.web import middleware
-
-logger = logging.getLogger(__name__)
 
 
 @middleware

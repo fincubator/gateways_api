@@ -35,6 +35,7 @@ script_location = migrations
 # are written from script.py.mako
 # output_encoding = utf-8
 
+# Not actually user, replaced by config.yml params
 sqlalchemy.url = postgres://postgres:postgres@postgres/postgres
 
 
